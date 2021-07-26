@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd-next";
 import Board from "../components/Board";
+import BoardAdder from "../components/BoardAdder";
 import TodoAdder from "../components/TodoAdder";
 import TodoList from "../components/TodoList";
 
@@ -48,7 +49,7 @@ export default function Home() {
   const [boardId, setBoardId] = useState(3);
   const [todoId, setTodoId] = useState(4);
 
-  function addTodo(boardId, content) {
+  const addTodo = (boardId, content) => {
     setBoards(
       boards.map((board) => {
         if (board.id === boardId) {
@@ -61,7 +62,7 @@ export default function Home() {
       })
     );
     setTodoId(todoId + 1);
-  }
+  };
 
   const modifyTodo = (todoId, content) => {
     const todo = boards
@@ -87,6 +88,15 @@ export default function Home() {
     destBoard.todos.splice(result.destination.index, 0, removed);
 
     setBoards(boards);
+  };
+
+  const addBoard = (board) => {
+    boards.push({
+      id: boardId,
+      title: board,
+      todos: [],
+    });
+    setBoardId(boardId + 1);
   };
 
   const removeBoard = (boardId) => {
@@ -117,6 +127,7 @@ export default function Home() {
             removeTodo={removeTodo}
           />
         ))}
+        <BoardAdder addBoard={addBoard} />
       </HStack>
     </DragDropContext>
   );
