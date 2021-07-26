@@ -12,7 +12,7 @@ function TodoAdder({ addTodo }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Flex bgColorm={3} p={3} rounded={4}>
+      <Flex p={3} rounded={4}>
         <Input
           size="md"
           color="gray.700"
