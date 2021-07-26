@@ -18,7 +18,15 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd-next";
 import TodoAdder from "./TodoAdder";
 import TodoList from "./TodoList";
 
-function Board({ id, title, todos, addTodo, modifyTodo, removeBoard }) {
+function Board({
+  id,
+  title,
+  todos,
+  addTodo,
+  modifyTodo,
+  removeBoard,
+  removeTodo,
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const onRemoveClick = () => {
@@ -39,7 +47,11 @@ function Board({ id, title, todos, addTodo, modifyTodo, removeBoard }) {
       <Droppable droppableId={id}>
         {(provided) => (
           <Box ref={provided.innerRef} {...provided.droppableProps} pt={2}>
-            <TodoList todos={todos} modifyTodo={modifyTodo} />
+            <TodoList
+              todos={todos}
+              modifyTodo={modifyTodo}
+              removeTodo={removeTodo}
+            />
             {provided.placeholder}
           </Box>
         )}
