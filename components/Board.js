@@ -11,10 +11,10 @@ function Board({ id, title, todos, addTodo }) {
       </Heading>
       <Droppable droppableId={id}>
         {(provided) => (
-          <div ref={provided.innerRef} {...provided.droppableProps}>
+          <Box ref={provided.innerRef} {...provided.droppableProps} pt={2}>
             <TodoList todos={todos} />
             {provided.placeholder}
-          </div>
+          </Box>
         )}
       </Droppable>
       <TodoAdder boardId={id} addTodo={addTodo} />
