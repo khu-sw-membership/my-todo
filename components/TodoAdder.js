@@ -12,10 +12,11 @@ function TodoAdder({ boardId, addTodo }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Flex p={3} rounded={4}>
+      <Flex rounded={4}>
         <Input
           size="md"
           color="gray.700"
+          background="gray.50"
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />

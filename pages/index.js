@@ -89,6 +89,10 @@ export default function Home() {
     setBoards(boards);
   };
 
+  const removeBoard = (boardId) => {
+    setBoards(boards.filter((board) => board.id !== boardId));
+  };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <HStack p={4} align="start">
@@ -98,6 +102,7 @@ export default function Home() {
             {...board}
             addTodo={addTodo}
             modifyTodo={modifyTodo}
+            removeBoard={removeBoard}
           />
         ))}
       </HStack>
