@@ -20,15 +20,15 @@ function Todo({ provided, todo, modifyTodo }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
 
-  const [title, setTitle] = useState(todo.msg);
+  const [title, setTitle] = useState(todo.title);
 
   const openModal = () => {
-    setTitle(todo.msg);
+    setTitle(todo.title);
     onOpen();
   };
 
   const applyModified = () => {
-    modifyTodo(todo.id, title);
+    modifyTodo(todo.id, { title: title });
     onClose();
   };
 
@@ -41,7 +41,7 @@ function Todo({ provided, todo, modifyTodo }) {
       onClick={openModal}
     >
       <Heading as="h4" size="md" color="gray.700">
-        {todo.msg}
+        {todo.title}
       </Heading>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
         <ModalOverlay />

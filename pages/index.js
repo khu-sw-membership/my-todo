@@ -22,11 +22,13 @@ export default function Home() {
       todos: [
         {
           id: 1,
-          msg: "우유 사오기",
+          title: "우유 사오기",
+          note: "1L짜리 두 팩 사와야 함.",
         },
         {
           id: 2,
-          msg: "알고리즘 문제 풀기",
+          title: "알고리즘 문제 풀기",
+          note: "",
         },
       ],
     },
@@ -36,7 +38,8 @@ export default function Home() {
       todos: [
         {
           id: 3,
-          msg: "투두",
+          title: "투두",
+          note: "",
         },
       ],
     },
@@ -45,13 +48,13 @@ export default function Home() {
   const [boardId, setBoardId] = useState(3);
   const [todoId, setTodoId] = useState(4);
 
-  function addTodo(boardId, todo) {
+  function addTodo(boardId, content) {
     setBoards(
       boards.map((board) => {
         if (board.id === boardId) {
           board.todos.push({
             id: todoId,
-            msg: todo,
+            ...content,
           });
         }
         return board;
@@ -65,7 +68,9 @@ export default function Home() {
       .map((board) => board.todos)
       .flat()
       .find((todo) => todo.id === todoId);
-    todo.msg = content;
+    for (var key in content) {
+      todo[key] = content[key];
+    }
     setBoards(boards);
   };
 
