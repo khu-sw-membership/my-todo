@@ -1,12 +1,12 @@
 import { Button, Flex, Input } from "@chakra-ui/react";
 import { useState } from "react";
 
-function TodoAdder({ addTodo }) {
+function TodoAdder({ boardId, addTodo }) {
   const [content, setContent] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    addTodo(content);
+    addTodo(boardId, content);
     setContent("");
   }
 
