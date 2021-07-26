@@ -13,6 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -22,14 +23,16 @@ function Todo({ provided, todo, modifyTodo }) {
   const initialRef = React.useRef();
 
   const [title, setTitle] = useState(todo.title);
+  const [note, setNote] = useState(todo.note);
 
   const openModal = () => {
     setTitle(todo.title);
+    setNote(todo.note);
     onOpen();
   };
 
   const applyModified = () => {
-    modifyTodo(todo.id, { title: title });
+    modifyTodo(todo.id, { title, note });
     onClose();
   };
 
@@ -58,6 +61,12 @@ function Todo({ provided, todo, modifyTodo }) {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </FormControl>
+            <Textarea
+              placeholder="노트를 입력하세요"
+              mt={4}
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            />
           </ModalBody>
 
           <ModalFooter>
