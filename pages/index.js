@@ -23,7 +23,7 @@ export default function Home() {
         {
           id: 1,
           title: "우유 사오기",
-          note: "1L짜리 두 팩 사와야 함.",
+          note: "Hello World",
         },
         {
           id: 2,

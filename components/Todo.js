@@ -12,6 +12,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -43,6 +44,7 @@ function Todo({ provided, todo, modifyTodo }) {
       <Heading as="h4" size="md" color="gray.700">
         {todo.title}
       </Heading>
+      <Text>{todo.note}</Text>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
         <ModalOverlay />
         <ModalContent>
