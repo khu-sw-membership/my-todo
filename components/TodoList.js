@@ -1,5 +1,6 @@
 import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 import { Draggable } from "react-beautiful-dnd-next";
+import Todo from "./Todo";
 
 function TodoList({ todos }) {
   return (
@@ -8,16 +9,7 @@ function TodoList({ todos }) {
         <Draggable key={todo.id} draggableId={todo.id} index={index}>
           {(provided) => (
             <Box ref={provided.innerRef} {...provided.draggableProps} mb={2}>
-              <Box
-                {...provided.dragHandleProps}
-                bgColor="white"
-                p={2}
-                rounded={4}
-              >
-                <Heading as="h4" size="md" color="gray.700">
-                  {todo.msg}
-                </Heading>
-              </Box>
+              <Todo provided={provided} todo={todo} />
             </Box>
           )}
         </Draggable>
