@@ -60,6 +60,15 @@ export default function Home() {
     setTodoId(todoId + 1);
   }
 
+  const modifyTodo = (todoId, content) => {
+    const todo = boards
+      .map((board) => board.todos)
+      .flat()
+      .find((todo) => todo.id === todoId);
+    todo.msg = content;
+    setBoards(boards);
+  };
+
   const onDragEnd = (result) => {
     if (!result.destination) return;
 
@@ -79,7 +88,12 @@ export default function Home() {
     <DragDropContext onDragEnd={onDragEnd}>
       <HStack p={4} align="start">
         {boards.map((board) => (
-          <Board key={board.id} {...board} addTodo={addTodo} />
+          <Board
+            key={board.id}
+            {...board}
+            addTodo={addTodo}
+            modifyTodo={modifyTodo}
+          />
         ))}
       </HStack>
     </DragDropContext>

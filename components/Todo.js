@@ -14,11 +14,23 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 
-function Todo({ provided, todo }) {
+function Todo({ provided, todo, modifyTodo }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
+
+  const [title, setTitle] = useState(todo.msg);
+
+  const openModal = () => {
+    setTitle(todo.msg);
+    onOpen();
+  };
+
+  const applyModified = () => {
+    modifyTodo(todo.id, title);
+    onClose();
+  };
 
   return (
     <Box
@@ -26,7 +38,7 @@ function Todo({ provided, todo }) {
       bgColor="white"
       p={2}
       rounded={4}
-      onClick={onOpen}
+      onClick={openModal}
     >
       <Heading as="h4" size="md" color="gray.700">
         {todo.msg}
@@ -37,12 +49,17 @@ function Todo({ provided, todo }) {
           <ModalCloseButton />
           <ModalBody p={4}>
             <FormControl pr={8}>
-              <Input ref={initialRef} placeholder="제목" value={todo.msg} />
+              <Input
+                ref={initialRef}
+                placeholder="제목"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
+            <Button colorScheme="blue" mr={3} onClick={applyModified}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>
