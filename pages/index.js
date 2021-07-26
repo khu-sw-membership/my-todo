@@ -9,6 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { DragDropContext } from "react-beautiful-dnd-next";
 import Board from "../components/Board";
 import TodoAdder from "../components/TodoAdder";
 import TodoList from "../components/TodoList";
@@ -59,11 +60,28 @@ export default function Home() {
     setTodoId(todoId + 1);
   }
 
+  const onDragEnd = (result) => {
+    if (!result.destination) return;
+
+    const sourceBoard = boards.find(
+      (board) => board.id == result.source.droppableId
+    );
+    const destBoard = boards.find(
+      (board) => board.id == result.destination.droppableId
+    );
+    const [removed] = sourceBoard.todos.splice(result.source.index, 1);
+    destBoard.todos.splice(result.destination.index, 0, removed);
+
+    setBoards(boards);
+  };
+
   return (
-    <HStack p={4} align="start">
-      {boards.map((board) => (
-        <Board key={board.id} {...board} addTodo={addTodo} />
-      ))}
-    </HStack>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <HStack p={4} align="start">
+        {boards.map((board) => (
+          <Board key={board.id} {...board} addTodo={addTodo} />
+        ))}
+      </HStack>
+    </DragDropContext>
   );
 }
