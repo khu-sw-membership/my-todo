@@ -6,7 +6,7 @@ function TodoAdder({ boardId, addTodo }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    addTodo(boardId, content);
+    addTodo(boardId, { title: content });
     setContent("");
   }
 
